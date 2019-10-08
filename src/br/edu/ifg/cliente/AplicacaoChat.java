@@ -24,27 +24,28 @@ public class AplicacaoChat {
 	public static void main(String[] args) {
 		try {
 
-			Registry registry = LocateRegistry.getRegistry("localhost", Constant.RMI_PORT);
+			Registry registry = LocateRegistry.getRegistry("192.168.1.101", Constant.RMI_PORT);
 			final InterfaceDNS remote = (InterfaceDNS) registry.lookup(Constant.RMI_ID);
 			InetAddress ip = InetAddress.getLocalHost();
 			String hostname = ip.getHostAddress();
 
 			String nick = JOptionPane.showInputDialog("Digite o nick");
-			JOptionPane.showMessageDialog(null, nick);
+			//JOptionPane.showMessageDialog(null, nick);
 
 			if (remote.autentica(nick, hostname)) {
-				JOptionPane.showMessageDialog(null, "Usuario adicionado com sucesso!");
+				System.out.println("Usuario adicionado com sucesso!");
 			} else {
-				JOptionPane.showMessageDialog(null, "Erro ao adicionar!");
+				System.out.println("Erro ao adicionar!");
 			}
 			ArrayList<String> lista = new ArrayList<>();
 
 			lista = remote.obterListaUsuariosOnline();
+			System.out.println("Nome dos usuarios On line:");
 			for (String nomeOnline : lista) {
-				JOptionPane.showMessageDialog(null, "Nome dos usuarios On line: " + nomeOnline);
+				System.out.println("" + nomeOnline);
 			}
 
-			JOptionPane.showMessageDialog(null, "O IP do Usuario: Jhonatan e: " + remote.obterIP("jhonatan"));
+			System.out.println("O IP do Usuario: " + nick + "e: " + remote.obterIP("jhonatan"));
 
 		} catch (Exception e) {
 			System.err.println("Client exception: " + e.toString());

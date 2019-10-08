@@ -35,7 +35,7 @@ public class DNS implements InterfaceDNS {
 			Registry registry = LocateRegistry.createRegistry(Constant.RMI_PORT);
 			registry.bind(Constant.RMI_ID, interfDNS);
 
-			JOptionPane.showMessageDialog(null, "Servidor rodando!");
+			System.out.println("Servidor rodando!");
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Server exception: " + e.toString());
@@ -45,7 +45,7 @@ public class DNS implements InterfaceDNS {
 
 	public boolean autentica(String nick, String ip) throws RemoteException {
 		tabelaUsuarios.adicionarUsuario(nick, ip);
-		JOptionPane.showMessageDialog(null, "Tabela de usuarios online: " + tabelaUsuarios.toString());
+		System.out.println("Tabela de usuarios online: " + tabelaUsuarios.toString());
 		return true;
 	}
 
@@ -55,7 +55,7 @@ public class DNS implements InterfaceDNS {
 		if (hash.containsKey(nick)) {
 			return hash.get(nick);
 		} else {
-			JOptionPane.showMessageDialog(null, "Nao existe a chave dentro da lista");
+			System.out.println("Nao existe a chave dentro da lista");
 		}
 		return null;
 	}
